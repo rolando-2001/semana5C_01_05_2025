@@ -9,10 +9,11 @@ namespace semana6C
 {
     public partial class MainWindow : Window
     {
-        
-        SqlConnection connection = new SqlConnection("Data Source=DESKTOP-58CNH6N\\SQLEXPRESS;Initial Catalog=Neptuno; User ID = rolando; Password=rolando2001;TrustServerCertificate=true");
 
-       
+        SqlConnection connection = new SqlConnection("Data Source=DESKTOP-58CNH6N\\SQLEXPRESS;Initial Catalog=Neptuno; User ID=rolando; Password=rolando2001;TrustServerCertificate=true");
+
+
+
 
         public MainWindow()
         {
