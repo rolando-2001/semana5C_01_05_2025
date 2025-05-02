@@ -1,0 +1,91 @@
+﻿<Window x:Class="semana6C.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:semana6C"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="auto" Width="800">
+   <Grid Background="#f0f0f0">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="20" Width="auto" HorizontalAlignment="Center">
+
+            <TextBlock Text="Registrar nuevo cliente" FontSize="18" FontWeight="Bold" Margin="0,20,0,10"/>
+
+            <!-- Campos de entrada -->
+            <StackPanel Margin="0,0,0,10">
+                <Label Content="ID Cliente"/>
+                <TextBox x:Name="txtIdCliente" Padding="5" Background="White"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,10">
+                <Label Content="Nombre Compañía"/>
+                <TextBox x:Name="txtNombreCompania" Padding="5" Background="White"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,10">
+                <Label Content="Nombre Contacto"/>
+                <TextBox x:Name="txtNombreContacto" Padding="5" Background="White"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,10">
+                <Label Content="Cargo Contacto"/>
+                <TextBox x:Name="txtCargoContacto" Padding="5" Background="White"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,10">
+                <Label Content="Dirección"/>
+                <TextBox x:Name="txtDireccion" Padding="5" Background="White"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,10">
+                <Label Content="Ciudad"/>
+                <TextBox x:Name="txtCiudad" Padding="5" Background="White"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,10">
+                <Label Content="Región"/>
+                <TextBox x:Name="txtRegion" Padding="5" Background="White"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,10">
+                <Label Content="Código Postal"/>
+                <TextBox x:Name="txtCodPostal" Padding="5" Background="White"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,10">
+                <Label Content="País"/>
+                <TextBox x:Name="txtPais" Padding="5" Background="White"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,10">
+                <Label Content="Teléfono"/>
+                <TextBox x:Name="txtTelefono" Padding="5" Background="White"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,10">
+                <Label Content="Fax"/>
+                <TextBox x:Name="txtFax" Padding="5" Background="White"/>
+            </StackPanel>
+
+            <!-- Botón para registrar -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10">
+                    <Button Width="100" Margin="5" Background="#007ACC" Foreground="White" Content="Crear" Click="Button_Click_1"/>
+                    <Button Width="100" Margin="5" Background="#FFA500" Foreground="White" Content="Actualizar" Click="BtnActualizar_Click" />
+                    <Button Width="100" Margin="5" Background="#DC3545" Foreground="White" Content="Eliminar" />
+                </StackPanel>
+
+                <Separator Margin="0,20,0,10"/>
+
+            <TextBlock Text="Clientes" FontSize="18" FontWeight="Bold" Margin="0,10,0,10"/>
+            <Button Height="30" Width="150" Click="Button_Click" Content="Listar Cliente" 
+                    Background="#28a745" Foreground="White" Margin="0,0,0,10"/>
+            <DataGrid x:Name="dgClientes" AutoGenerateColumns="True"  Height="auto" Width="auto" 
+                      Background="White" Margin="0,0,0,20"
+                      SelectionChanged="dgClientes_SelectionChanged"
+                      />
+        </StackPanel>
+    </ScrollViewer>
+</Grid>
+
+</Window>
