@@ -1,35 +1,26 @@
-﻿using System.Data;
-using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Data.SqlClient;
 
 namespace semana6C
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-
+        
         SqlConnection connection = new SqlConnection("Data Source=DESKTOP-58CNH6N\\SQLEXPRESS;Initial Catalog=Neptuno;Integrated Security=True;;TrustServerCertificate=True");
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             List<Cliente> clientes = new List<Cliente>();
-
-
 
             try
             {
@@ -55,16 +46,15 @@ namespace semana6C
                 }
 
                 connection.Close();
-                dgClientes.ItemsSource = clientes;
+                dgClientes.ItemsSource = clientes;  
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar clientes: " + ex.Message);
             }
-            
-
         }
 
+        
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             try
@@ -87,6 +77,10 @@ namespace semana6C
 
                 command.ExecuteNonQuery();
                 MessageBox.Show("Cliente registrado con éxito.");
+                connection.Close();
+
+                
+                Button_Click(null, null);
             }
             catch (Exception ex)
             {
@@ -94,11 +88,12 @@ namespace semana6C
             }
             finally
             {
-                if (connection.State == System.Data.ConnectionState.Open)
+                if (connection.State == ConnectionState.Open)
                     connection.Close();
             }
         }
 
+       
         private void dgClientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (dgClientes.SelectedItem is Cliente cliente)
@@ -117,10 +112,7 @@ namespace semana6C
             }
         }
 
-
-
-        //
-
+    
         private void BtnActualizar_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -145,7 +137,8 @@ namespace semana6C
                 MessageBox.Show("Cliente actualizado correctamente.");
                 connection.Close();
 
-                Button_Click(null, null); // volver a listar
+           
+                Button_Click(null, null);
             }
             catch (Exception ex)
             {
@@ -158,17 +151,36 @@ namespace semana6C
         }
 
 
-        //
+        private void BtnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtIdCliente.Text))
+            {
+                MessageBox.Show("Selecciona un cliente para eliminar.");
+                return;
+            }
+
+            try
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("USP_DelCliente", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@idCliente", txtIdCliente.Text);
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Cliente eliminado lógicamente.");
+                connection.Close();
 
 
-
-
+                Button_Click(null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar cliente: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
-
-
-    //
-
-
-
-
 }
